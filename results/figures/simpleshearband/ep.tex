@@ -1,0 +1,46 @@
+% Line CSVs have quoted headers, so columns are referenced by index: 0 arc_length, 1 accel_X, 2 effective_plastic_strain, 3 vel_X.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                    width=\linewidth,
+                    height=0.75\linewidth,
+                    xlabel={Arc length},
+                    ylabel={$\bar\varepsilon^p$},
+                    legend pos=north west,
+                    legend cell align=left,
+                    grid=major,
+                ]
+                \addplot[blue, thick] table[col sep=comma, x index=0, y index=2] {results/data/simpleshearband/run0_t0_line.csv};
+                \addlegendentry{Run 0}
+                \addplot[red, thick, dashed] table[col sep=comma, x index=0, y index=2] {results/data/simpleshearband/run1_t0_line.csv};
+                \addlegendentry{Run 1}
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Restart step}\label{fig:ssb_ep_t0}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                    width=\linewidth,
+                    height=0.75\linewidth,
+                    xlabel={Arc length},
+                    ylabel={$\bar\varepsilon^p$},
+                    legend pos=north west,
+                    legend cell align=left,
+                    grid=major,
+                ]
+                \addplot[blue, thick] table[col sep=comma, x index=0, y index=2] {results/data/simpleshearband/run0_t1_line.csv};
+                \addlegendentry{Run 0}
+                \addplot[red, thick, dashed] table[col sep=comma, x index=0, y index=2] {results/data/simpleshearband/run1_t1_line.csv};
+                \addlegendentry{Run 1}
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Step after restart}\label{fig:ssb_ep_t1}
+    \end{subfigure}
+    \caption{Effective plastic strain along the sample line for run 0 and run 1.}\label{fig:ssb_ep}
+\end{figure}

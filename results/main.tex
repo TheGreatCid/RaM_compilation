@@ -1,0 +1,80 @@
+\section{Current Results}\label{s:current_results}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Status of current results.}\label{table:current_results}
+    \begin{tabular}{lp{0.25\textwidth}p{0.4\textwidth}}
+        \toprule
+        Name                      & Status & Physics \\
+        \midrule
+        Simple Box                &        &         \\
+        Wave                      &        &         \\
+        Simple ShearBand          &        &         \\
+        Sandia Fracture Challenge &        &         \\
+        Tophat                    &        &         \\
+        Torsion                   &        &         \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\FloatBarrier{}
+
+\subsection{Simple Box}\label{ss:simple_box}
+
+\subsection{Wave}\label{ss:wave}
+
+\subsection{Simple ShearBand}\label{ss:simple_shearband}
+
+The simple shear band problem consists of a box mesh put into pure shear. Periodic boundary conditions exist at $x=0$ and $x=0$ for $u_x$ and $u_y$.
+
+The remeshing is set up so that the grid structure of the original mesh is preserved, with the same number of elements in the $x$ and $y$ directions, shown in Figure~\ref{fig:mesh_ex}. Final effective plastic strain and temperature fields are shown in Figure~\ref{fig:field_ex}.
+
+\begin{figure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=0.8\textwidth]{results/pictures/simpleshearband/mesh0.png}    
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}    
+        \includegraphics[width=\textwidth]{results/pictures/simpleshearband/mesh1.png}    
+    \end{subfigure}
+    \caption{Original and final mesh}\label{fig:mesh_ex}
+\end{figure}
+
+
+\begin{figure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{results/pictures/simpleshearband/ep_example.png}    
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}    
+        \includegraphics[width=\textwidth]{results/pictures/simpleshearband/T_example.png}    
+    \end{subfigure}
+    \caption{Final effective plastic strain~(left) and temperature fields~(right)}\label{fig:field_ex}
+\end{figure}
+
+\input{results/figures/simpleshearband/energy.tex}
+\input{results/figures/simpleshearband/ep.tex}
+\input{results/figures/simpleshearband/accel_vel.tex}
+
+\FloatBarrier{}
+
+
+
+
+\subsection{Sandia Fracture Challenge}\label{ss:sandia_fracture_challenge}
+
+I simulated a Sandia fracture challenge using RaM. The domain is in Figure~\ref{fig:challenge_domain}. Loading is done via a point load in the center of the loading pins. The residual value of the degradation is high, $\eta=\num{1e-4}$ to help reduce node movement within a damage band on a restart. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{results/pictures/frac_challenge/domain.png}
+    \caption{Domain for fracture challenge}\label{fig:challenge_domain}
+\end{figure}
+
+\input{results/figures/frac_challenge/reaction.tex}
+
+\FloatBarrier{}
+
+
+
+\subsection{Tophat}\label{ss:tophat}
+
+\subsection{Torsion}\label{ss:torsion}

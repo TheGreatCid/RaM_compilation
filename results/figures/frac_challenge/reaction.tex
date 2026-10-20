@@ -1,0 +1,31 @@
+% Top reaction force vs. loading-pin displacement u_y = 8*time (mm), with and without RaM.
+% The x range stops at the end of the last RaM segment (_6.csv, t = 0.35625 -> u_y = 2.85 mm).
+% RaM segments _1 to _6 start with an all-zero row at the restart time, so that row is dropped.
+\pgfplotsset{
+    fcskipfirst/.style={x filter/.expression={\coordindex==0 ? nan : x}},
+}
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+                width=0.6\textwidth,
+                height=0.4\textwidth,
+                xmin=0, xmax=2.85,
+                restrict x to domain=0:2.85,
+                xlabel={Loading pin displacement $u_y$ (\unit{\milli\meter})},
+                ylabel={Top reaction force},
+                legend pos=north east,
+                legend cell align=left,
+                grid=major,
+            ]
+            \addplot[blue, line width=1.6pt] table[col sep=comma, x expr=8*\thisrow{time}, y=reaction_top] {results/data/frac_challenge/frac_challenge_1e4meshnotch_single_0.csv};
+            \addlegendentry{No RaM}
+            \addplot[red, line width=0.8pt] table[col sep=comma, x expr=8*\thisrow{time}, y=reaction_top] {results/data/frac_challenge/frac_challenge_meshnotch_1e4_0.csv};
+            \addlegendentry{RaM}
+            \foreach \i in {1,...,6} {
+                    \addplot[red, line width=0.8pt, fcskipfirst, forget plot] table[col sep=comma, x expr=8*\thisrow{time}, y=reaction_top] {results/data/frac_challenge/frac_challenge_meshnotch_1e4_\i.csv};
+                }
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Top reaction force vs.\ loading pin displacement with and without RaM.}\label{fig:challenge_reaction}
+\end{figure}

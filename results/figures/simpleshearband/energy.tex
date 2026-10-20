@@ -1,0 +1,70 @@
+% Global CSVs have quoted headers, so columns are referenced by index: 0 Time, 1 kinetic_energy_int, 2 psie_active_int, 3 total_energy.
+% The first row of run1_global.csv is an all-zero placeholder at the restart time, so it is dropped.
+% The zoomed panel puts kinetic (solid, left axis) and elastic (dashed, right axis) energy on separate y axes;
+% it has no legend of its own and shares the line styles of the full-history panel.
+\pgfplotsset{
+    ssbskipfirst/.style={x filter/.expression={\coordindex==0 ? nan : x}},
+    ssbzoom/.style={
+            width=0.8\linewidth,
+            height=0.65\linewidth,
+            xmin=18.5, xmax=20,
+            restrict x to domain=18.5:20,
+        },
+}
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                    width=0.8\linewidth,
+                    height=0.65\linewidth,
+                    xmin=0, xmax=20,
+                    xlabel={Time},
+                    ylabel={Energy},
+                    legend pos=south east,
+                    legend cell align=left,
+                    legend style={font=\scriptsize},
+                    grid=major,
+                ]
+                \addplot[blue, line width=1.6pt] table[col sep=comma, x index=0, y index=1] {results/data/simpleshearband/run0_global.csv};
+                \addlegendentry{Kinetic, run 0}
+                \addplot[red, line width=0.8pt, ssbskipfirst] table[col sep=comma, x index=0, y index=1] {results/data/simpleshearband/run1_global.csv};
+                \addlegendentry{Kinetic, run 1}
+                \addplot[blue, line width=1.6pt, dashed] table[col sep=comma, x index=0, y index=2] {results/data/simpleshearband/run0_global.csv};
+                \addlegendentry{Elastic, run 0}
+                \addplot[red, line width=0.8pt, dashed, ssbskipfirst] table[col sep=comma, x index=0, y index=2] {results/data/simpleshearband/run1_global.csv};
+                \addlegendentry{Elastic, run 1}
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Full history}\label{fig:ssb_energy_full}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                    ssbzoom,
+                    axis y line*=left,
+                    xlabel={Time},
+                    ylabel={Kinetic energy},
+                    grid=major,
+                ]
+                \addplot[blue, line width=1.6pt] table[col sep=comma, x index=0, y index=1] {results/data/simpleshearband/run0_global.csv};
+                \addplot[red, line width=0.8pt, ssbskipfirst] table[col sep=comma, x index=0, y index=1] {results/data/simpleshearband/run1_global.csv};
+            \end{axis}
+            \begin{axis}[
+                    ssbzoom,
+                    axis y line*=right,
+                    axis x line=none,
+                    ylabel={Elastic energy},
+                    yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=3},
+                ]
+                \addplot[blue, line width=1.6pt, dashed] table[col sep=comma, x index=0, y index=2] {results/data/simpleshearband/run0_global.csv};
+                \addplot[red, line width=0.8pt, dashed, ssbskipfirst] table[col sep=comma, x index=0, y index=2] {results/data/simpleshearband/run1_global.csv};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Zoomed near restart; kinetic (solid, left axis), elastic (dashed, right axis)}\label{fig:ssb_energy_zoom}
+    \end{subfigure}
+    \caption{Kinetic and elastic energy vs.\ time for run 0 and run 1.}\label{fig:ssb_energy}
+\end{figure}

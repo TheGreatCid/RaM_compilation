@@ -1,0 +1,83 @@
+% Line CSVs have quoted headers, so columns are referenced by index: 0 arc_length, 1 accel_X, 2 effective_plastic_strain, 3 vel_X.
+% Acceleration (left axis, solid) and velocity (right axis, dashed) overlaid with two axis environments.
+% The legend lives on the first axis; velocity entries are added there with \addlegendimage.
+% Run 0 is drawn thicker so it stays visible where run 1 overlaps it.
+\pgfplotsset{
+    ssbdual/.style={
+            width=0.8\linewidth,
+            height=0.65\linewidth,
+            xmin=0, xmax=1,
+            scaled y ticks=base 10:3,
+        },
+    ssbrun0/.style={blue, line width=1.6pt},
+    ssbrun1/.style={red, line width=0.8pt},
+}
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                    ssbdual,
+                    axis y line*=left,
+                    xlabel={Arc length},
+                    ylabel={$a_x$},
+                    grid=major,
+                    legend pos=north east,
+                    legend cell align=left,
+                    legend style={font=\scriptsize},
+                ]
+                \addplot[ssbrun0] table[col sep=comma, x index=0, y index=1] {results/data/simpleshearband/run0_t0_line.csv};
+                \addlegendentry{$a_x$, run 0}
+                \addplot[ssbrun1] table[col sep=comma, x index=0, y index=1] {results/data/simpleshearband/run1_t0_line.csv};
+                \addlegendentry{$a_x$, run 1}
+                \addlegendimage{ssbrun0, dashed}\addlegendentry{$v_x$, run 0}
+                \addlegendimage{ssbrun1, dashed}\addlegendentry{$v_x$, run 1}
+            \end{axis}
+            \begin{axis}[
+                    ssbdual,
+                    axis y line*=right,
+                    axis x line=none,
+                    ylabel={$v_x$},
+                ]
+                \addplot[ssbrun0, dashed] table[col sep=comma, x index=0, y index=3] {results/data/simpleshearband/run0_t0_line.csv};
+                \addplot[ssbrun1, dashed] table[col sep=comma, x index=0, y index=3] {results/data/simpleshearband/run1_t0_line.csv};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Restart step}\label{fig:ssb_av_t0}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                    ssbdual,
+                    axis y line*=left,
+                    xlabel={Arc length},
+                    ylabel={$a_x$},
+                    grid=major,
+                    legend pos=north east,
+                    legend cell align=left,
+                    legend style={font=\scriptsize},
+                ]
+                \addplot[ssbrun0] table[col sep=comma, x index=0, y index=1] {results/data/simpleshearband/run0_t1_line.csv};
+                \addlegendentry{$a_x$, run 0}
+                \addplot[ssbrun1] table[col sep=comma, x index=0, y index=1] {results/data/simpleshearband/run1_t1_line.csv};
+                \addlegendentry{$a_x$, run 1}
+                \addlegendimage{ssbrun0, dashed}\addlegendentry{$v_x$, run 0}
+                \addlegendimage{ssbrun1, dashed}\addlegendentry{$v_x$, run 1}
+            \end{axis}
+            \begin{axis}[
+                    ssbdual,
+                    axis y line*=right,
+                    axis x line=none,
+                    ylabel={$v_x$},
+                ]
+                \addplot[ssbrun0, dashed] table[col sep=comma, x index=0, y index=3] {results/data/simpleshearband/run0_t1_line.csv};
+                \addplot[ssbrun1, dashed] table[col sep=comma, x index=0, y index=3] {results/data/simpleshearband/run1_t1_line.csv};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Step after restart}\label{fig:ssb_av_t1}
+    \end{subfigure}
+    \caption{Acceleration (solid, left axis) and velocity (dashed, right axis) along the sample line for run 0 and run 1.}\label{fig:ssb_accel_vel}
+\end{figure}
