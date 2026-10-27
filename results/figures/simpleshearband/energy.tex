@@ -49,6 +49,7 @@
                     xlabel={Time},
                     ylabel={Kinetic energy},
                     grid=major,
+                    xmin=18.8
                 ]
                 \addplot[blue, line width=1.6pt] table[col sep=comma, x index=0, y index=1] {results/data/simpleshearband/run0_global.csv};
                 \addplot[red, line width=0.8pt, ssbskipfirst] table[col sep=comma, x index=0, y index=1] {results/data/simpleshearband/run1_global.csv};
@@ -58,7 +59,8 @@
                     axis y line*=right,
                     axis x line=none,
                     ylabel={Elastic energy},
-                    yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=3},
+                    yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=3}, 
+                    xmin=18.8
                 ]
                 \addplot[blue, line width=1.6pt, dashed] table[col sep=comma, x index=0, y index=2] {results/data/simpleshearband/run0_global.csv};
                 \addplot[red, line width=0.8pt, dashed, ssbskipfirst] table[col sep=comma, x index=0, y index=2] {results/data/simpleshearband/run1_global.csv};

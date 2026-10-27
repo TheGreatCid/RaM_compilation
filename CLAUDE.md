@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Purpose
 
-This repo is a LaTeX document that records **updates to the methodology** in David Torres's dissertation (source: `/home/det12/projects/torres_dissertation`, built from `dissertation.tex`). "RaM" means **Remeshing and Mapping** (also written "remapping"), the Lie-group-preserving mesh-transfer workflow in dissertation Chapter 4 (`Chapter4/main.tex`, label `ch:rmrm`). Read the baseline below as "what the dissertation currently says". Updates in this document should name the dissertation section/equation they change, and state what changed and why.
+This repo is a LaTeX document that records **updates to the methodology** in David Torres's dissertation (source: `/home/det12/projects/torres_dissertation`, built from `dissertation.tex`). "RaM" means **Remeshing and Mapping** (also written "remapping"), the Lie-group-preserving mesh-transfer workflow in dissertation Chapter 4 (`Chapter4/main.tex`, label `ch:rmrm`). Read the baseline below as "what the dissertation currently says". Updates in this document should state what changed relative to the dissertation and why. Do not cite specific dissertation chapters, sections or equation numbers in the document text; refer to "the dissertation" generally. (The chapter table below is only for finding the source material.)
 
 ## Build
 

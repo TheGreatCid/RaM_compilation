@@ -1,0 +1,25 @@
+% Shear stress vs. time for the torsion problem with RaM, one CSV per RaM segment (_0 to _114).
+% Columns are referenced by name because later segments add a dt column.
+% Segments _1 onward start with an all-zero row at the restart time, so that row is dropped.
+\pgfplotsset{
+    torskipfirst/.style={x filter/.expression={\coordindex==0 ? nan : x}},
+}
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+                width=0.6\textwidth,
+                height=0.4\textwidth,
+                xmin=0,
+                xlabel={Time (\unit{\micro\second})},
+                ylabel={Shear stress (\unit{\mega\pascal})},
+                grid=major,
+            ]
+            \addplot[blue, thick] table[col sep=comma, x=time, y=shear_stress] {results/data/torsion/ss/tor_d_small_1xs_new_0.csv};
+            \foreach \i in {1,...,114} {
+                    \addplot[blue, thick, torskipfirst] table[col sep=comma, x=time, y=shear_stress] {results/data/torsion/ss/tor_d_small_1xs_new_\i.csv};
+                }
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Shear stress vs.\ time for the torsion problem with RaM.}\label{fig:torsion_shear_stress}
+\end{figure}
